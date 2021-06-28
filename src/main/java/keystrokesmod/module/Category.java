@@ -4,7 +4,7 @@
 // Decompiled by Procyon v0.5.36
 // 
 
-package keystrokesmod.render;
+package keystrokesmod.module;
 
 import keystrokesmod.main.Ravenb2;
 import keystrokesmod.module.Module;
@@ -18,7 +18,7 @@ import net.minecraft.client.gui.FontRenderer;
 
 import java.util.ArrayList;
 
-public class ChromaManager
+public class Category
 {
     public ArrayList<ModuleDescRender> c;
     public Module.category categoryName;
@@ -35,7 +35,7 @@ public class ChromaManager
     public boolean pin;
     private int chromaSpeed;
     
-    public ChromaManager(final Module.category category) {
+    public Category(final Module.category category) {
         this.n4m = false;
         this.pin = false;
         this.c = new ArrayList<ModuleDescRender>();
@@ -56,7 +56,7 @@ public class ChromaManager
         }
     }
     
-    public ChromaManager(final String d) {
+    public Category(final String d) {
         this.n4m = false;
         this.pin = false;
         this.c = new ArrayList<ModuleDescRender>();

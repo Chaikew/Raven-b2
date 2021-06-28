@@ -28,29 +28,29 @@ import java.util.Random;
 
 public class Reach extends Module
 {
-    public static ModuleSettings2 a;
-    public static ModuleSettings2 b;
-    public static ModuleSettings c;
-    public static ModuleSettings d;
-    public static ModuleSettings e;
-    public static ModuleSettings f;
+    public static ModuleSettings2 minReach;
+    public static ModuleSettings2 maxReach;
+    public static ModuleSettings weaponOnly;
+    public static ModuleSettings movingOnly;
+    public static ModuleSettings sprintOnly;
+    public static ModuleSettings hitThroughBlocks;
     public Random rand;
     
     public Reach() {
         super(new char[] { 'R', 'e', 'a', 'c', 'h' }, category.combat, 0);
         this.rand = new Random();
-        this.registerSetting(Reach.a = new ModuleSettings2(new char[] { 'M', 'i', 'n' }, 3.1, 3.0, 6.0, 0.05));
-        this.registerSetting(Reach.b = new ModuleSettings2(new char[] { 'M', 'a', 'x' }, 3.3, 3.0, 6.0, 0.05));
-        this.registerSetting(Reach.c = new ModuleSettings(new char[] { 'W', 'e', 'a', 'p', 'o', 'n', ' ', 'O', 'n', 'l', 'y' }, false));
-        this.registerSetting(Reach.d = new ModuleSettings(new char[] { 'M', 'o', 'v', 'i', 'n', 'g', ' ', 'O', 'n', 'l', 'y' }, false));
-        this.registerSetting(Reach.e = new ModuleSettings(new char[] { 'S', 'p', 'r', 'i', 'n', 't', ' ', 'O', 'n', 'l', 'y' }, false));
-        this.registerSetting(Reach.f = new ModuleSettings(new char[] { 'H', 'i', 't', ' ', 'T', 'h', 'r', 'o', 'u', 'g', 'h', ' ', 'B', 'l', 'o', 'c', 'k', 's' }, false));
+        this.registerSetting(Reach.minReach = new ModuleSettings2(new char[] { 'M', 'i', 'n' }, 3.1, 3.0, 6.0, 0.05));
+        this.registerSetting(Reach.maxReach = new ModuleSettings2(new char[] { 'M', 'a', 'x' }, 3.3, 3.0, 6.0, 0.05));
+        this.registerSetting(Reach.weaponOnly = new ModuleSettings(new char[] { 'W', 'e', 'a', 'p', 'o', 'n', ' ', 'O', 'n', 'l', 'y' }, false));
+        this.registerSetting(Reach.movingOnly = new ModuleSettings(new char[] { 'M', 'o', 'v', 'i', 'n', 'g', ' ', 'O', 'n', 'l', 'y' }, false));
+        this.registerSetting(Reach.sprintOnly = new ModuleSettings(new char[] { 'S', 'p', 'r', 'i', 'n', 't', ' ', 'O', 'n', 'l', 'y' }, false));
+        this.registerSetting(Reach.hitThroughBlocks = new ModuleSettings(new char[] { 'H', 'i', 't', ' ', 'T', 'h', 'r', 'o', 'u', 'g', 'h', ' ', 'B', 'l', 'o', 'c', 'k', 's' }, false));
     }
     
     @SubscribeEvent
-    public void e(final MouseEvent ev) {
+    public void onMove(final MouseEvent ev) {
         if (ModuleHelper.e() && !SelfDestruct.isDestructed) {
-            if (Reach.c.isToggled()) {
+            if (Reach.weaponOnly.isToggled()) {
                 if (Reach.mc.thePlayer.getCurrentEquippedItem() == null) {
                     return;
                 }
@@ -58,20 +58,20 @@ public class Reach extends Module
                     return;
                 }
             }
-            if (Reach.d.isToggled() && Reach.mc.thePlayer.moveForward == 0.0 && Reach.mc.thePlayer.moveStrafing == 0.0) {
+            if (Reach.movingOnly.isToggled() && Reach.mc.thePlayer.moveForward == 0.0 && Reach.mc.thePlayer.moveStrafing == 0.0) {
                 return;
             }
-            if (Reach.e.isToggled() && !Reach.mc.thePlayer.isSprinting()) {
+            if (Reach.sprintOnly.isToggled() && !Reach.mc.thePlayer.isSprinting()) {
                 return;
             }
-            if (!Reach.f.isToggled() && Reach.mc.objectMouseOver != null) {
+            if (!Reach.hitThroughBlocks.isToggled() && Reach.mc.objectMouseOver != null) {
                 final BlockPos zzzzz = Reach.mc.objectMouseOver.getBlockPos();
                 if (zzzzz != null && Reach.mc.theWorld.getBlockState(zzzzz).getBlock() != Blocks.air) {
                     return;
                 }
             }
-            ModuleHelper.b(Reach.a, Reach.b);
-            final double zzzzzD2 = Reach.a.getInput() + this.rand.nextDouble() * (Reach.b.getInput() - Reach.a.getInput());
+            ModuleHelper.b(Reach.minReach, Reach.maxReach);
+            final double zzzzzD2 = Reach.minReach.getInput() + this.rand.nextDouble() * (Reach.maxReach.getInput() - Reach.minReach.getInput());
             final Object[] zzzzzN = zzzzz(zzzzzD2, 0.0, 0.0f);
             if (zzzzzN == null) {
                 return;
@@ -140,6 +140,6 @@ public class Reach extends Module
     
     @Override
     public void guiUpdate() {
-        ModuleHelper.b(Reach.a, Reach.b);
+        ModuleHelper.b(Reach.minReach, Reach.maxReach);
     }
 }

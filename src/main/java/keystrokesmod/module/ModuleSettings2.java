@@ -9,42 +9,42 @@ import java.math.BigDecimal;
 
 public class ModuleSettings2 extends ModuleSettingsList
 {
-    private String n;
-    private double v;
-    private double a;
-    private double m;
-    private double i;
+    private String settingName;
+    private double defaultValue;
+    private double max;
+    private double min;
+    private double intervals;
     
     public ModuleSettings2(final char[] settingName, final double defaultValue, final double min, final double max, final double intervals) {
         super(new String(settingName));
-        this.n = new String(settingName);
-        this.v = defaultValue;
-        this.m = min;
-        this.a = max;
-        this.i = intervals;
+        this.settingName = new String(settingName);
+        this.defaultValue = defaultValue;
+        this.min = min;
+        this.max = max;
+        this.intervals = intervals;
     }
     
     @Override
     public String get() {
-        return this.n;
+        return this.settingName;
     }
     
     public double getInput() {
-        return r(this.v, 2);
+        return r(this.defaultValue, 2);
     }
     
     public double geti() {
-        return this.m;
+        return this.min;
     }
 
     public double geta() {
-        return this.a;
+        return this.max;
     }
     
     public void setValue(double n) {
-        n = c(n, this.m, this.a);
-        n = Math.round(n * (1.0 / this.i)) / (1.0 / this.i);
-        this.v = n;
+        n = c(n, this.min, this.max);
+        n = Math.round(n * (1.0 / this.intervals)) / (1.0 / this.intervals);
+        this.defaultValue = n;
     }
     
     public static double c(double v, final double i, final double a) {

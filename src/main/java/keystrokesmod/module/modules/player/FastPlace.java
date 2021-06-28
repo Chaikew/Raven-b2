@@ -21,7 +21,7 @@ public class FastPlace extends Module
     }
     
     @SubscribeEvent
-    public void a(final TickEvent.PlayerTickEvent b) {
+    public void onPlayerTick(final TickEvent.PlayerTickEvent b) {
         if (ModuleHelper.e() && !SelfDestruct.isDestructed) {
             try {
                 final Field c = Minecraft.class.getDeclaredField("field_71467_ac");

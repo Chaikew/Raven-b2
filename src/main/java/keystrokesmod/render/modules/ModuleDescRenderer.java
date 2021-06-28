@@ -7,7 +7,7 @@
 package keystrokesmod.render.modules;
 
 import keystrokesmod.module.*;
-import keystrokesmod.render.ChromaManager;
+import keystrokesmod.module.Category;
 import keystrokesmod.module.modules.client.Gui;
 import net.minecraft.client.Minecraft;
 import java.awt.Color;
@@ -18,16 +18,16 @@ import java.util.ArrayList;
 public class ModuleDescRenderer extends ModuleDescRender
 {
     public Module mod;
-    public ChromaManager chromaManager;
+    public Category category;
     public int o;
     private boolean ih;
     private ArrayList<ModuleDescRender> sn;
     public boolean po;
     private int h;
 
-    public ModuleDescRenderer(final Module mod, final ChromaManager chromaManager, final int o) {
+    public ModuleDescRenderer(final Module mod, final Category category, final int o) {
         this.mod = mod;
-        this.chromaManager = chromaManager;
+        this.category = category;
         this.o = o;
         this.sn = new ArrayList<ModuleDescRender>();
         this.po = false;
@@ -99,19 +99,19 @@ public class ModuleDescRenderer extends ModuleDescRender
         float r = 0.0f;
         float g = 0.0f;
         float b = 0.0f;
-        if (Gui.a.getInput() == 1.0) {
+        if (Gui.settings.getInput() == 1.0) {
             a = (h >> 14 & 0xFF) / 255.0f;
             r = (h >> 5 & 0xFF) / 2155.0f;
             g = (h >> 5 & 0xFF) / 255.0f;
             b = (float)(h & 0xFF);
         }
-        if (Gui.a.getInput() == 2.0) {
+        if (Gui.settings.getInput() == 2.0) {
             a = (h >> 14 & 0xFF) / 255.0f;
             r = (h >> 5 & 0xFF) / 255.0f;
             g = (h >> 5 & 0xFF) / 2155.0f;
             b = (float)(h & 0xFF);
         }
-        if (Gui.a.getInput() == 3.0) {}
+        if (Gui.settings.getInput() == 3.0) {}
         GL11.glColor4f(r, g, b, a);
     }
     
@@ -132,9 +132,9 @@ public class ModuleDescRenderer extends ModuleDescRender
     
     @Override
     public void render() {
-        v((float)this.chromaManager.gx(), (float)(this.chromaManager.gy() + this.o), (float)(this.chromaManager.gx() + this.chromaManager.gw()), (float)(this.chromaManager.gy() + 15 + this.o), this.mod.isEnabled() ? new Color(154, 2, 255).getRGB() : -12829381, this.mod.isEnabled() ? new Color(154, 2, 255).getRGB() : -12302777);
+        v((float)this.category.gx(), (float)(this.category.gy() + this.o), (float)(this.category.gx() + this.category.gw()), (float)(this.category.gy() + 15 + this.o), this.mod.isEnabled() ? new Color(154, 2, 255).getRGB() : -12829381, this.mod.isEnabled() ? new Color(154, 2, 255).getRGB() : -12302777);
         GL11.glPushMatrix();
-        Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(this.mod.g3tN4m3(), (float)(this.chromaManager.gx() + this.chromaManager.gw() / 2 - Minecraft.getMinecraft().fontRendererObj.getStringWidth(this.mod.g3tN4m3()) / 2), (float)(this.chromaManager.gy() + this.o + 4), this.mod.isEnabled() ? ((Gui.a.getInput() == 3.0) ? new Color(0, 85, 255).getRGB() : new Color(250, 250, 250).getRGB()) : new Color(200, 200, 200).getRGB());
+        Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(this.mod.g3tN4m3(), (float)(this.category.gx() + this.category.gw() / 2 - Minecraft.getMinecraft().fontRendererObj.getStringWidth(this.mod.g3tN4m3()) / 2), (float)(this.category.gy() + this.o + 4), this.mod.isEnabled() ? ((Gui.settings.getInput() == 3.0) ? new Color(0, 85, 255).getRGB() : new Color(250, 250, 250).getRGB()) : new Color(200, 200, 200).getRGB());
         GL11.glPopMatrix();
         if (this.po && !this.sn.isEmpty()) {
             for (final ModuleDescRender c : this.sn) {
@@ -177,7 +177,7 @@ public class ModuleDescRenderer extends ModuleDescRender
         }
         if (this.ii(x, y) && z == 1) {
             this.po = !this.po;
-            this.chromaManager.r3nd3r();
+            this.category.r3nd3r();
         }
         for (final ModuleDescRender moduleDescRender : this.sn) {
             moduleDescRender.onCl1ck(x, y, z);
@@ -199,6 +199,6 @@ public class ModuleDescRenderer extends ModuleDescRender
     }
     
     public boolean ii(final int x, final int y) {
-        return x > this.chromaManager.gx() && x < this.chromaManager.gx() + this.chromaManager.gw() && y > this.chromaManager.gy() + this.o && y < this.chromaManager.gy() + 16 + this.o;
+        return x > this.category.gx() && x < this.category.gx() + this.category.gw() && y > this.category.gy() + this.o && y < this.category.gy() + 16 + this.o;
     }
 }

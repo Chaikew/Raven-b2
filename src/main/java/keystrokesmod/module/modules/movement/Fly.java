@@ -18,8 +18,8 @@ import net.minecraft.util.Timer;
 
 public class Fly extends Module
 {
-    public static ModuleSettings2 a;
-    public static ModuleDesc b;
+    public static ModuleSettings2 mode;
+    public static ModuleDesc moduleDesc;
     private float f;
     private int i;
     private boolean g;
@@ -28,10 +28,10 @@ public class Fly extends Module
     public Fly() {
         super(new char[] { 'F', 'l', 'y' }, category.movement, 0);
         this.aw = new String(new char[] { 'A', 'i', 'r', 'W', 'a', 'l', 'k' });
-        Fly.a = new ModuleSettings2(new char[] { 'M', 'o', 'd', 'e' }, 1.0, 1.0, 4.0, 1.0);
-        Fly.b = new ModuleDesc(ModuleHelper.c + "New " + this.aw);
-        this.registerSetting(Fly.a);
-        this.registerSetting(Fly.b);
+        Fly.mode = new ModuleSettings2(new char[] { 'M', 'o', 'd', 'e' }, 1.0, 1.0, 4.0, 1.0);
+        Fly.moduleDesc = new ModuleDesc(ModuleHelper.c + "New " + this.aw);
+        this.registerSetting(Fly.mode);
+        this.registerSetting(Fly.moduleDesc);
     }
     
     @Override
@@ -53,10 +53,10 @@ public class Fly extends Module
         if (!ModuleHelper.e() || SelfDestruct.isDestructed) {
             return;
         }
-        if (Fly.a.getInput() != 4.0 && Fly.mc.thePlayer.capabilities.isFlying) {
+        if (Fly.mode.getInput() != 4.0 && Fly.mc.thePlayer.capabilities.isFlying) {
             Fly.mc.thePlayer.capabilities.isFlying = false;
         }
-        if (Fly.a.getInput() == 1.0) {
+        if (Fly.mode.getInput() == 1.0) {
             Fly.mc.thePlayer.motionY = 0.0;
             Fly.mc.thePlayer.onGround = true;
             for (int i = 0; i < 3; ++i) {
@@ -66,7 +66,7 @@ public class Fly extends Module
                 }
             }
         }
-        else if (Fly.a.getInput() == 2.0) {
+        else if (Fly.mode.getInput() == 2.0) {
             if (Fly.mc.gameSettings.keyBindForward.isKeyDown()) {
                 Fly.mc.thePlayer.stepHeight = 0.0f;
                 ++this.i;
@@ -81,7 +81,7 @@ public class Fly extends Module
                 Fly.mc.thePlayer.setPosition(Fly.mc.thePlayer.posX, Fly.mc.thePlayer.posY + 0.4, Fly.mc.thePlayer.posZ);
             }
         }
-        else if (Fly.a.getInput() == 3.0) {
+        else if (Fly.mode.getInput() == 3.0) {
             if (ModuleHelper.gt().timerSpeed >= 2.0f) {
                 ModuleHelper.rt();
             }
@@ -103,7 +103,7 @@ public class Fly extends Module
             }
             Fly.mc.thePlayer.onGround = true;
         }
-        else if (Fly.a.getInput() == 4.0) {
+        else if (Fly.mode.getInput() == 4.0) {
             Fly.mc.thePlayer.capabilities.isFlying = true;
             if (Fly.mc.gameSettings.keyBindJump.isPressed()) {
                 final EntityPlayerSP thePlayer = Fly.mc.thePlayer;
@@ -121,7 +121,7 @@ public class Fly extends Module
     
     @SubscribeEvent
     public void onTick(final TickEvent.ClientTickEvent e) {
-        if (e.phase.equals((Object)TickEvent.Phase.END) && Fly.a.getInput() == 1.0 && Fly.mc.gameSettings.keyBindJump.isPressed()) {
+        if (e.phase.equals((Object)TickEvent.Phase.END) && Fly.mode.getInput() == 1.0 && Fly.mc.gameSettings.keyBindJump.isPressed()) {
             Fly.mc.thePlayer.jump();
             Fly.mc.thePlayer.motionY = 0.41999998688697815;
             Fly.mc.thePlayer.onGround = true;
@@ -130,17 +130,17 @@ public class Fly extends Module
     
     @Override
     public void guiUpdate() {
-        if (Fly.a.getInput() == 1.0) {
-            Fly.b.setDesc(ModuleHelper.c + "New " + this.aw);
+        if (Fly.mode.getInput() == 1.0) {
+            Fly.moduleDesc.setDesc(ModuleHelper.c + "New " + this.aw);
         }
-        else if (Fly.a.getInput() == 2.0) {
-            Fly.b.setDesc(ModuleHelper.c + "Old " + this.aw);
+        else if (Fly.mode.getInput() == 2.0) {
+            Fly.moduleDesc.setDesc(ModuleHelper.c + "Old " + this.aw);
         }
-        else if (Fly.a.getInput() == 3.0) {
-            Fly.b.setDesc(ModuleHelper.c + "Timer " + this.aw);
+        else if (Fly.mode.getInput() == 3.0) {
+            Fly.moduleDesc.setDesc(ModuleHelper.c + "Timer " + this.aw);
         }
-        else if (Fly.a.getInput() == 4.0) {
-            Fly.b.setDesc(ModuleHelper.c + "No AC");
+        else if (Fly.mode.getInput() == 4.0) {
+            Fly.moduleDesc.setDesc(ModuleHelper.c + "No AC");
         }
     }
 }

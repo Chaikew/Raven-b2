@@ -15,20 +15,20 @@ import net.minecraft.util.MathHelper;
 
 public class Bhop extends Module
 {
-    public static ModuleSettings2 a;
-    public static ModuleDesc b;
+    public static ModuleSettings2 mode;
+    public static ModuleDesc moduleDesc;
     
     public Bhop() {
         super(new char[] { 'B', 'h', 'o', 'p' }, category.movement, 0);
-        Bhop.a = new ModuleSettings2(new char[] { 'M', 'o', 'd', 'e' }, 1.0, 1.0, 3.0, 1.0);
-        Bhop.b = new ModuleDesc("Current: Fast");
-        this.registerSetting(Bhop.a);
-        this.registerSetting(Bhop.b);
+        Bhop.mode = new ModuleSettings2(new char[] { 'M', 'o', 'd', 'e' }, 1.0, 1.0, 3.0, 1.0);
+        Bhop.moduleDesc = new ModuleDesc("Current: Fast");
+        this.registerSetting(Bhop.mode);
+        this.registerSetting(Bhop.moduleDesc);
     }
     
     @Override
     public void update() {
-        if (Bhop.a.getInput() == 1.0) {
+        if (Bhop.mode.getInput() == 1.0) {
             if (ModuleHelper.im() && Bhop.mc.thePlayer.hurtTime < 5) {
                 final float d = ModuleHelper.gd();
                 if (Bhop.mc.thePlayer.onGround) {
@@ -46,7 +46,7 @@ public class Bhop extends Module
                 }
             }
         }
-        else if (Bhop.a.getInput() == 2.0) {
+        else if (Bhop.mode.getInput() == 2.0) {
             if (ModuleHelper.im()) {
                 ModuleHelper.ss(ModuleHelper.gbms() + 0.005, false);
                 if (Bhop.mc.thePlayer.onGround) {
@@ -62,7 +62,7 @@ public class Bhop extends Module
                 Bhop.mc.thePlayer.motionZ = 0.0;
             }
         }
-        else if (Bhop.a.getInput() == 3.0) {
+        else if (Bhop.mode.getInput() == 3.0) {
             if (Bhop.mc.thePlayer.onGround && ModuleHelper.im()) {
                 Bhop.mc.thePlayer.jump();
             }
@@ -72,14 +72,14 @@ public class Bhop extends Module
     
     @Override
     public void guiUpdate() {
-        if (Bhop.a.getInput() == 1.0) {
-            Bhop.b.setDesc("Current: Fast");
+        if (Bhop.mode.getInput() == 1.0) {
+            Bhop.moduleDesc.setDesc("Current: Fast");
         }
-        else if (Bhop.a.getInput() == 2.0) {
-            Bhop.b.setDesc("Current: " + new String(new char[] { 'M', 'i', 'n', 'e', 'p', 'l', 'e', 'x' }));
+        else if (Bhop.mode.getInput() == 2.0) {
+            Bhop.moduleDesc.setDesc("Current: " + new String(new char[] { 'M', 'i', 'n', 'e', 'p', 'l', 'e', 'x' }));
         }
-        else if (Bhop.a.getInput() == 3.0) {
-            Bhop.b.setDesc("Current: " + new String(new char[] { 'N', 'C', 'P', ' ', '&', ' ', 'V', 'i', 'p', 'e', 'r' }));
+        else if (Bhop.mode.getInput() == 3.0) {
+            Bhop.moduleDesc.setDesc("Current: " + new String(new char[] { 'N', 'C', 'P', ' ', '&', ' ', 'V', 'i', 'p', 'e', 'r' }));
         }
     }
 }

@@ -35,7 +35,7 @@ public class Ravenb2
     public static Minecraft mc;
     public static NotAName c;
     private static KeyStroke keyStroke;
-    private static KeyStrokeRenderer b2;
+    private static KeyStrokeRenderer keyStrokeRenderer;
     private static boolean isKeyStrokeEnabled;
     public static int ravenVersion;
     
@@ -45,7 +45,7 @@ public class Ravenb2
     
     @Mod.EventHandler
     public void init(final FMLInitializationEvent e) {
-        Ravenb2.b2 = new KeyStrokeRenderer();
+        Ravenb2.keyStrokeRenderer = new KeyStrokeRenderer();
         ClientCommandHandler.instance.registerCommand((ICommand)new KeyStrokeCommand());
         FMLCommonHandler.instance().bus().register((Object)this);
         FMLCommonHandler.instance().bus().register((Object)new AutoCfgMurdrMystGui());
@@ -61,15 +61,15 @@ public class Ravenb2
     @SubscribeEvent
     public void onTick(final TickEvent.ClientTickEvent e) {
         if (ModuleHelper.e() && !SelfDestruct.isDestructed) {
-            for (final Module h : Ravenb2.c.getModuleManager().getMods()) {
+            for (final Module mod : Ravenb2.c.getModuleManager().getMods()) {
                 if (Ravenb2.mc.currentScreen == null) {
-                    h.keybind();
+                    mod.keybind();
                 }
                 else if (Ravenb2.mc.currentScreen instanceof ClickGui) {
-                    h.guiUpdate();
+                    mod.guiUpdate();
                 }
-                if (h.isEnabled()) {
-                    h.update();
+                if (mod.isEnabled()) {
+                    mod.update();
                 }
             }
         }
@@ -83,8 +83,8 @@ public class Ravenb2
         return Ravenb2.keyStroke;
     }
     
-    public static KeyStrokeRenderer e2() {
-        return Ravenb2.b2;
+    public static KeyStrokeRenderer getKeyStrokeRenderer() {
+        return Ravenb2.keyStrokeRenderer;
     }
 
     public static void enableKeyStroke() {

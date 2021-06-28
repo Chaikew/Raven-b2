@@ -29,9 +29,9 @@ import java.util.List;
 
 public class MurderMystery extends Module
 {
-    public static ModuleSettings a;
-    public static ModuleSettings b;
-    public static ModuleSettings c;
+    public static ModuleSettings alert;
+    public static ModuleSettings searchDetective;
+    public static ModuleSettings announceMurderer;
     public static boolean a1;
     public static int a2;
     private static List<EntityPlayer> m;
@@ -39,11 +39,11 @@ public class MurderMystery extends Module
     
     public MurderMystery() {
         super(new char[] { 'M', 'u', 'r', 'd', 'e', 'r', 'M', 'y', 's', 't', 'e', 'r', 'y' }, category.minigames, 0);
-        MurderMystery.a = new ModuleSettings(new char[] { 'A', 'l', 'e', 'r', 't' }, true);
-        MurderMystery.b = new ModuleSettings(new char[] { 'S', 'e', 'a', 'r', 'c', 'h', ' ', 'D', 'e', 't', 'e', 'c', 't', 'i', 'v', 'e' }, true);
-        MurderMystery.c = new ModuleSettings(new char[] { 'A', 'n', 'n', 'o', 'u', 'n', 'c', 'e', ' ', 'M', 'u', 'r', 'd', 'e', 'r', 'e', 'r' }, false);
-        this.registerSetting(MurderMystery.b);
-        this.registerSetting(MurderMystery.c);
+        MurderMystery.alert = new ModuleSettings(new char[] { 'A', 'l', 'e', 'r', 't' }, true);
+        MurderMystery.searchDetective = new ModuleSettings(new char[] { 'S', 'e', 'a', 'r', 'c', 'h', ' ', 'D', 'e', 't', 'e', 'c', 't', 'i', 'v', 'e' }, true);
+        MurderMystery.announceMurderer = new ModuleSettings(new char[] { 'A', 'n', 'n', 'o', 'u', 'n', 'c', 'e', ' ', 'M', 'u', 'r', 'd', 'e', 'r', 'e', 'r' }, false);
+        this.registerSetting(MurderMystery.searchDetective);
+        this.registerSetting(MurderMystery.announceMurderer);
     }
     
     @Override
@@ -76,21 +76,21 @@ public class MurderMystery extends Module
                             if (i instanceof ItemSword || i instanceof ItemAxe || en.getHeldItem().getDisplayName().replaceAll("§", "").equals("aKnife")) {
                                 if (!MurderMystery.m.contains(en)) {
                                     MurderMystery.m.add(en);
-                                    if (MurderMystery.a.isToggled()) {
+                                    if (MurderMystery.alert.isToggled()) {
                                         MurderMystery.mc.thePlayer.playSound("note.pling", 1.0f, 1.0f);
                                         ModuleHelper.sm("&7[&cALERT&7] &e" + en.getName() + " &3is a murderer!");
                                     }
-                                    if (MurderMystery.c.isToggled()) {
+                                    if (MurderMystery.announceMurderer.isToggled()) {
                                         MurderMystery.mc.thePlayer.sendChatMessage(en.getName() + " is a murderer!");
                                     }
                                 }
                             }
-                            else if (i instanceof ItemBow && MurderMystery.b.isToggled() && !MurderMystery.bw.contains(en)) {
+                            else if (i instanceof ItemBow && MurderMystery.searchDetective.isToggled() && !MurderMystery.bw.contains(en)) {
                                 MurderMystery.bw.add(en);
-                                if (MurderMystery.a.isToggled()) {
+                                if (MurderMystery.alert.isToggled()) {
                                     ModuleHelper.sm("&7[&cALERT&7] &e" + en.getName() + " &3has a bow!");
                                 }
-                                if (MurderMystery.c.isToggled()) {
+                                if (MurderMystery.announceMurderer.isToggled()) {
                                     MurderMystery.mc.thePlayer.sendChatMessage(en.getName() + " has a bow!");
                                 }
                             }

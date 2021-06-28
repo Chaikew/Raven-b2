@@ -16,18 +16,18 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class Sprint extends Module
 {
-    public static ModuleSettings a;
+    public static ModuleSettings omniSprint;
     
     public Sprint() {
         super(new char[] { 'S', 'p', 'r', 'i', 'n', 't' }, category.movement, 0);
-        this.registerSetting(Sprint.a = new ModuleSettings(new char[] { 'O', 'm', 'n', 'i', 'S', 'p', 'r', 'i', 'n', 't' }, false));
+        this.registerSetting(Sprint.omniSprint = new ModuleSettings(new char[] { 'O', 'm', 'n', 'i', 'S', 'p', 'r', 'i', 'n', 't' }, false));
     }
     
     @SubscribeEvent
     public void opt(final TickEvent.PlayerTickEvent e) {
         if (Sprint.mc.inGameHasFocus) {
             final EntityPlayerSP p = Sprint.mc.thePlayer;
-            if (Sprint.a.isToggled()) {
+            if (Sprint.omniSprint.isToggled()) {
                 if (ModuleHelper.im() && p.getFoodStats().getFoodLevel() > 6) {
                     p.setSprinting(true);
                 }

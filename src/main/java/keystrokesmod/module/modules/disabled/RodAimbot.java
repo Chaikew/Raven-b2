@@ -22,19 +22,19 @@ import java.util.Timer;
 
 public class RodAimbot extends Module
 {
-    public static ModuleSettings2 a;
-    public static ModuleSettings2 b;
-    public static ModuleSettings c;
-    public static ModuleSettings d;
+    public static ModuleSettings2 fov;
+    public static ModuleSettings2 distance;
+    public static ModuleSettings packet;
+    public static ModuleSettings aimInvis;
     private Timer timer;
     private TimerTask timerTask;
     
     public RodAimbot() {
         super(new char[] { 'R', 'o', 'd', 'A', 'i', 'm', 'b', 'o', 't' }, category.combat, 0);
-        this.registerSetting(RodAimbot.a = new ModuleSettings2(new char[] { 'F', 'O', 'V' }, 90.0, 15.0, 360.0, 1.0));
-        this.registerSetting(RodAimbot.b = new ModuleSettings2(new char[] { 'D', 'i', 's', 't', 'a', 'n', 'c', 'e' }, 4.5, 1.0, 10.0, 0.5));
-        this.registerSetting(RodAimbot.c = new ModuleSettings(new char[] { 'P', 'a', 'c', 'k', 'e', 't' }, true));
-        this.registerSetting(RodAimbot.d = new ModuleSettings(new char[] { 'A', 'i', 'm', ' ', 'I', 'n', 'v', 'i', 's' }, false));
+        this.registerSetting(RodAimbot.fov = new ModuleSettings2(new char[] { 'F', 'O', 'V' }, 90.0, 15.0, 360.0, 1.0));
+        this.registerSetting(RodAimbot.distance = new ModuleSettings2(new char[] { 'D', 'i', 's', 't', 'a', 'n', 'c', 'e' }, 4.5, 1.0, 10.0, 0.5));
+        this.registerSetting(RodAimbot.packet = new ModuleSettings(new char[] { 'P', 'a', 'c', 'k', 'e', 't' }, true));
+        this.registerSetting(RodAimbot.aimInvis = new ModuleSettings(new char[] { 'A', 'i', 'm', ' ', 'I', 'n', 'v', 'i', 's' }, false));
     }
     
     @SubscribeEvent
@@ -54,13 +54,13 @@ public class RodAimbot extends Module
                     public void run() {
                         ++this.i;
                         if (this.i == 10) {
-                            ModuleHelper.r(ent, RodAimbot.c.isToggled());
+                            ModuleHelper.r(ent, RodAimbot.packet.isToggled());
                             Module.mc.playerController.sendUseItem((EntityPlayer) Module.mc.thePlayer, (World) Module.mc.theWorld, Module.mc.thePlayer.getCurrentEquippedItem());
                             RodAimbot.this.timerTask.cancel();
                             RodAimbot.this.timer.cancel();
                         }
                         else {
-                            ModuleHelper.r(ent, RodAimbot.c.isToggled());
+                            ModuleHelper.r(ent, RodAimbot.packet.isToggled());
                         }
                     }
                 };
@@ -71,11 +71,11 @@ public class RodAimbot extends Module
     
     public Entity j() {
         Entity k = null;
-        int f = (int) RodAimbot.a.getInput();
+        int f = (int) RodAimbot.fov.getInput();
         for (final Object ent : RodAimbot.mc.theWorld.loadedEntityList) {
             final Entity l = (Entity)ent;
-            if (l.isEntityAlive() && l != RodAimbot.mc.thePlayer && RodAimbot.mc.thePlayer.getDistanceToEntity(l) <= RodAimbot.b.getInput() && l instanceof EntityLivingBase && o(l, (float)f)) {
-                if (!RodAimbot.d.isToggled() && l.isInvisible()) {
+            if (l.isEntityAlive() && l != RodAimbot.mc.thePlayer && RodAimbot.mc.thePlayer.getDistanceToEntity(l) <= RodAimbot.distance.getInput() && l instanceof EntityLivingBase && o(l, (float)f)) {
+                if (!RodAimbot.aimInvis.isToggled() && l.isInvisible()) {
                     return null;
                 }
                 k = l;

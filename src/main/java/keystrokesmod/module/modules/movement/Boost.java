@@ -13,8 +13,8 @@ import keystrokesmod.module.ModuleSettings2;
 
 public class Boost extends Module
 {
-    public static ModuleSettings2 a;
-    public static ModuleSettings2 b;
+    public static ModuleSettings2 multiplier;
+    public static ModuleSettings2 time;
     private int i;
     private boolean t;
     
@@ -22,8 +22,8 @@ public class Boost extends Module
         super(new char[] { 'B', 'o', 'o', 's', 't' }, category.movement, 0);
         this.i = 0;
         this.t = false;
-        this.registerSetting(Boost.a = new ModuleSettings2(new char[] { 'M', 'u', 'l', 't', 'i', 'p', 'l', 'i', 'e', 'r' }, 2.0, 1.0, 3.0, 0.05));
-        this.registerSetting(Boost.b = new ModuleSettings2(new char[] { 'T', 'i', 'm', 'e', ' ', '(', 'T', 'i', 'c', 'k', 's', ')' }, 15.0, 1.0, 50.0, 1.0));
+        this.registerSetting(Boost.multiplier = new ModuleSettings2(new char[] { 'M', 'u', 'l', 't', 'i', 'p', 'l', 'i', 'e', 'r' }, 2.0, 1.0, 3.0, 0.05));
+        this.registerSetting(Boost.time = new ModuleSettings2(new char[] { 'T', 'i', 'm', 'e', ' ', '(', 'T', 'i', 'c', 'k', 's', ')' }, 15.0, 1.0, 50.0, 1.0));
     }
     
     @Override
@@ -50,8 +50,8 @@ public class Boost extends Module
         if (this.i == 0) {
             this.i = Boost.mc.thePlayer.ticksExisted;
         }
-        ModuleHelper.gt().timerSpeed = (float) Boost.a.getInput();
-        if (this.i == Boost.mc.thePlayer.ticksExisted - Boost.b.getInput()) {
+        ModuleHelper.gt().timerSpeed = (float) Boost.multiplier.getInput();
+        if (this.i == Boost.mc.thePlayer.ticksExisted - Boost.time.getInput()) {
             ModuleHelper.rt();
             this.disable();
         }

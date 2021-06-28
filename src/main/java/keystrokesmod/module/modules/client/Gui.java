@@ -17,12 +17,12 @@ import net.minecraft.client.gui.GuiScreen;
 
 public class Gui extends Module
 {
-    public static ModuleSettings2 a;
+    public static ModuleSettings2 settings;
     public static ModuleDesc b;
     
     public Gui() {
         super(new char[] { 'G', 'u', 'i' }, category.client, 54);
-        this.registerSetting(Gui.a = new ModuleSettings2(new char[] { 'T', 'h', 'e', 'm', 'e' }, 1.0, 1.0, 3.0, 1.0));
+        this.registerSetting(Gui.settings = new ModuleSettings2("Theme", 1.0, 1.0, 3.0, 1.0));
         this.registerSetting(Gui.b = new ModuleDesc(ModuleHelper.c + "b" + Ravenb2.ravenVersion));
     }
     
@@ -39,13 +39,13 @@ public class Gui extends Module
     
     @Override
     public void guiUpdate() {
-        if (Gui.a.getInput() == 1.0) {
+        if (Gui.settings.getInput() == 1.0) {
             Gui.b.setDesc(ModuleHelper.c + "b" + Ravenb2.ravenVersion);
         }
-        if (Gui.a.getInput() == 2.0) {
+        if (Gui.settings.getInput() == 2.0) {
             Gui.b.setDesc(ModuleHelper.c + "b" + (Ravenb2.ravenVersion - 1));
         }
-        if (Gui.a.getInput() == 3.0) {
+        if (Gui.settings.getInput() == 3.0) {
             Gui.b.setDesc(ModuleHelper.c + "Dark");
         }
     }

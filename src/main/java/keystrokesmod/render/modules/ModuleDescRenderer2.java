@@ -23,8 +23,8 @@ public class ModuleDescRenderer2 extends ModuleDescRender
     public ModuleDescRenderer2(final ModuleDesc desc, final ModuleDescRenderer b, final int o) {
         this.desc = desc;
         this.p = b;
-        this.x = b.chromaManager.gx() + b.chromaManager.gw();
-        this.y = b.chromaManager.gy() + b.o;
+        this.x = b.category.gx() + b.category.gw();
+        this.y = b.category.gy() + b.o;
         this.o = o;
     }
     
@@ -32,7 +32,7 @@ public class ModuleDescRenderer2 extends ModuleDescRender
     public void render() {
         GL11.glPushMatrix();
         GL11.glScaled(0.5, 0.5, 0.5);
-        Minecraft.getMinecraft().fontRendererObj.drawString(this.desc.getDesc(), (float)((this.p.chromaManager.gx() + 4) * 2), (float)((this.p.chromaManager.gy() + this.o + 4) * 2), Color.HSBtoRGB(System.currentTimeMillis() % 3750L / 3750.0f, 0.8f, 0.8f), false);
+        Minecraft.getMinecraft().fontRendererObj.drawString(this.desc.getDesc(), (float)((this.p.category.gx() + 4) * 2), (float)((this.p.category.gy() + this.o + 4) * 2), Color.HSBtoRGB(System.currentTimeMillis() % 3750L / 3750.0f, 0.8f, 0.8f), false);
         GL11.glPopMatrix();
     }
     

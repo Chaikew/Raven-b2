@@ -36,26 +36,26 @@ public class UpdateModules
     public static int au9;
     
     public static void ss() {
-        UpdateModules.theme = Gui.a.getInput();
-        UpdateModules.r1 = Reach.a.getInput();
-        UpdateModules.r2 = Reach.b.getInput();
-        UpdateModules.r3 = Reach.c.isToggled();
-        UpdateModules.r4 = Reach.d.isToggled();
-        UpdateModules.r5 = Reach.e.isToggled();
-        UpdateModules.r6 = Reach.f.isToggled();
+        UpdateModules.theme = Gui.settings.getInput();
+        UpdateModules.r1 = Reach.minReach.getInput();
+        UpdateModules.r2 = Reach.maxReach.getInput();
+        UpdateModules.r3 = Reach.weaponOnly.isToggled();
+        UpdateModules.r4 = Reach.movingOnly.isToggled();
+        UpdateModules.r5 = Reach.sprintOnly.isToggled();
+        UpdateModules.r6 = Reach.hitThroughBlocks.isToggled();
         UpdateModules.r7 = Ravenb2.c.getModuleManager().getModule(Reach.class).getKeycode();
-        UpdateModules.v1 = Velocity.a.getInput();
-        UpdateModules.v2 = Velocity.b.getInput();
-        UpdateModules.v3 = Velocity.c.getInput();
+        UpdateModules.v1 = Velocity.horizontal.getInput();
+        UpdateModules.v2 = Velocity.vertical.getInput();
+        UpdateModules.v3 = Velocity.chance.getInput();
         UpdateModules.v4 = Ravenb2.c.getModuleManager().getModule(Velocity.class).getKeycode();
-        UpdateModules.au1 = AutoClicker.a.getInput();
-        UpdateModules.au2 = AutoClicker.b.getInput();
-        UpdateModules.au3 = AutoClicker.c.getInput();
-        UpdateModules.au4 = AutoClicker.d.isToggled();
-        UpdateModules.au5 = AutoClicker.e.isToggled();
-        UpdateModules.au6 = AutoClicker.inv.isToggled();
-        UpdateModules.au7 = AutoClicker.p.isToggled();
-        UpdateModules.au8 = AutoClicker.q.isToggled();
+        UpdateModules.au1 = AutoClicker.minCPS.getInput();
+        UpdateModules.au2 = AutoClicker.maxCPS.getInput();
+        UpdateModules.au3 = AutoClicker.jitter.getInput();
+        UpdateModules.au4 = AutoClicker.weaponOnly.isToggled();
+        UpdateModules.au5 = AutoClicker.breakBlocks.isToggled();
+        UpdateModules.au6 = AutoClicker.inventoryFill.isToggled();
+        UpdateModules.au7 = AutoClicker.leftClick.isToggled();
+        UpdateModules.au8 = AutoClicker.rightClick.isToggled();
         UpdateModules.au9 = Ravenb2.c.getModuleManager().getModule(AutoClicker.class).getKeycode();
         ConfigManager.sc2();
     }

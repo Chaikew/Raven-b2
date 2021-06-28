@@ -12,16 +12,16 @@ import net.minecraft.client.entity.EntityPlayerSP;
 
 public class Spin extends Module
 {
-    public static ModuleSettings2 a;
-    public static ModuleSettings2 b;
+    public static ModuleSettings2 rotation;
+    public static ModuleSettings2 speed;
     private float yaw;
 
     public Spin() {
         super(new char[] { 'S', 'p', 'i', 'n' }, category.fun, 0);
-        Spin.a = new ModuleSettings2(new char[] { 'R', 'o', 't', 'a', 't', 'i', 'o', 'n' }, 360.0, 30.0, 360.0, 1.0);
-        Spin.b = new ModuleSettings2(new char[] { 'S', 'p', 'e', 'e', 'd' }, 25.0, 1.0, 60.0, 1.0);
-        this.registerSetting(Spin.a);
-        this.registerSetting(Spin.b);
+        Spin.rotation = new ModuleSettings2(new char[] { 'R', 'o', 't', 'a', 't', 'i', 'o', 'n' }, 360.0, 30.0, 360.0, 1.0);
+        Spin.speed = new ModuleSettings2(new char[] { 'S', 'p', 'e', 'e', 'd' }, 25.0, 1.0, 60.0, 1.0);
+        this.registerSetting(Spin.rotation);
+        this.registerSetting(Spin.speed);
     }
 
     @Override
@@ -36,16 +36,16 @@ public class Spin extends Module
 
     @Override
     public void update() {
-        final double left = this.yaw + Spin.a.getInput() - Spin.mc.thePlayer.rotationYaw;
-        if (left < Spin.b.getInput()) {
+        final double left = this.yaw + Spin.rotation.getInput() - Spin.mc.thePlayer.rotationYaw;
+        if (left < Spin.speed.getInput()) {
             final EntityPlayerSP thePlayer = Spin.mc.thePlayer;
             thePlayer.rotationYaw += (float)left;
             this.disable();
         }
         else {
             final EntityPlayerSP thePlayer2 = Spin.mc.thePlayer;
-            thePlayer2.rotationYaw += (float)Spin.b.getInput();
-            if (Spin.mc.thePlayer.rotationYaw >= this.yaw + Spin.a.getInput()) {
+            thePlayer2.rotationYaw += (float)Spin.speed.getInput();
+            if (Spin.mc.thePlayer.rotationYaw >= this.yaw + Spin.rotation.getInput()) {
                 this.disable();
             }
         }

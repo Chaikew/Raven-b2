@@ -38,9 +38,9 @@ public class AutoCfgMurdrMystGui extends Gui
                     return;
                 }
                 if (AutoCfgMurdrMystGui.mc.currentScreen == null && !AutoCfgMurdrMystGui.mc.gameSettings.showDebugInfo) {
-                    final boolean a = HUD.e.isToggled();
-                    final boolean b = HUD.f.isToggled();
-                    final boolean c = HUD.g.isToggled();
+                    final boolean isRainbowToggled = HUD.rainbow.isToggled();
+                    final boolean isChromaToggled = HUD.chroma.isToggled();
+                    final boolean isBrightToggled = HUD.bright.isToggled();
                     GL11.glPushMatrix();
                     int y = 62;
                     long rnbw = 0L;
@@ -53,16 +53,16 @@ public class AutoCfgMurdrMystGui extends Gui
                             if (!m.isEnabled()) {
                                 continue;
                             }
-                            if (!a && !b) {
-                                AutoCfgMurdrMystGui.mc.fontRendererObj.drawString(m.g3tN4m3(), 2, y, new Color((int) HUD.b.getInput(), (int) HUD.c.getInput(), (int) HUD.d.getInput()).getRGB());
+                            if (!isRainbowToggled && !isChromaToggled) {
+                                AutoCfgMurdrMystGui.mc.fontRendererObj.drawString(m.g3tN4m3(), 2, y, new Color((int) HUD.red.getInput(), (int) HUD.green.getInput(), (int) HUD.blue.getInput()).getRGB());
                             }
                             else {
-                                if (a) {
-                                    if (b) {
-                                        HUD.f.disable();
+                                if (isRainbowToggled) {
+                                    if (isChromaToggled) {
+                                        HUD.chroma.disable();
                                     }
                                     int chrm = 0;
-                                    if (!c) {
+                                    if (!isBrightToggled) {
                                         chrm = Color.HSBtoRGB((System.currentTimeMillis() + rnbw) % 5000L / 4750.0f, 0.8f, 0.8f);
                                     }
                                     else {
@@ -70,15 +70,15 @@ public class AutoCfgMurdrMystGui extends Gui
                                     }
                                     AutoCfgMurdrMystGui.mc.fontRendererObj.drawString(m.g3tN4m3(), 2, y, chrm);
                                 }
-                                else if (b) {
-                                    if (a) {
-                                        HUD.e.disable();
+                                else if (isChromaToggled) {
+                                    if (isRainbowToggled) {
+                                        HUD.rainbow.disable();
                                     }
                                     int x = 2;
                                     long rnbw2 = 0L;
                                     for (int i = 0; i < m.g3tN4m3().length(); ++i) {
                                         int chrm2 = 0;
-                                        if (!c) {
+                                        if (!isBrightToggled) {
                                             chrm2 = Color.HSBtoRGB((System.currentTimeMillis() + rnbw + rnbw2) % 5000L / 4750.0f, 0.8f, 0.8f);
                                         }
                                         else {
@@ -89,13 +89,13 @@ public class AutoCfgMurdrMystGui extends Gui
                                         rnbw2 -= 90L;
                                     }
                                 }
-                                if (!c) {
+                                if (!isBrightToggled) {
                                     rnbw -= 300L;
                                 }
-                                else if (a) {
+                                else if (isRainbowToggled) {
                                     rnbw -= 100L;
                                 }
-                                else if (b) {
+                                else if (isChromaToggled) {
                                     rnbw -= 30L;
                                 }
                             }
@@ -124,13 +124,13 @@ public class AutoCfgMurdrMystGui extends Gui
                             ++AutoCfgMurdrMystGui.c3;
                         }
                         if (AutoCfgMurdrMystGui.c3 == 25 || AutoCfgMurdrMystGui.c3 == 26) {
-                            if (AutoConfig.a2.isToggled()) {
+                            if (AutoConfig.configureReach.isToggled()) {
                                 AutoConfig.a(p, s2);
                             }
-                            if (AutoConfig.a3.isToggled()) {
+                            if (AutoConfig.configureVelocity.isToggled()) {
                                 AutoConfig.b(p, s2);
                             }
-                            if (AutoConfig.a4.isToggled()) {
+                            if (AutoConfig.configureAutoClick.isToggled()) {
                                 AutoConfig.c(p, s2);
                             }
                             ++AutoCfgMurdrMystGui.c3;

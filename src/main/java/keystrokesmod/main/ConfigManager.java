@@ -114,31 +114,31 @@ public class ConfigManager
             while ((line = reader.readLine()) != null) {
                 switch (++i) {
                     case 1: {
-                        Gui.a.setValue(Double.parseDouble(line));
+                        Gui.settings.setValue(Double.parseDouble(line));
                         continue;
                     }
                     case 2: {
-                        Reach.a.setValue(Double.parseDouble(line));
+                        Reach.minReach.setValue(Double.parseDouble(line));
                         continue;
                     }
                     case 3: {
-                        Reach.b.setValue(Double.parseDouble(line));
+                        Reach.maxReach.setValue(Double.parseDouble(line));
                         continue;
                     }
                     case 4: {
-                        Reach.c.setEnabled(Boolean.parseBoolean(line));
+                        Reach.weaponOnly.setEnabled(Boolean.parseBoolean(line));
                         continue;
                     }
                     case 5: {
-                        Reach.d.setEnabled(Boolean.parseBoolean(line));
+                        Reach.movingOnly.setEnabled(Boolean.parseBoolean(line));
                         continue;
                     }
                     case 6: {
-                        Reach.e.setEnabled(Boolean.parseBoolean(line));
+                        Reach.sprintOnly.setEnabled(Boolean.parseBoolean(line));
                         continue;
                     }
                     case 7: {
-                        Reach.f.setEnabled(Boolean.parseBoolean(line));
+                        Reach.hitThroughBlocks.setEnabled(Boolean.parseBoolean(line));
                         continue;
                     }
                     case 8: {
@@ -146,15 +146,15 @@ public class ConfigManager
                         continue;
                     }
                     case 9: {
-                        Velocity.a.setValue(Double.parseDouble(line));
+                        Velocity.horizontal.setValue(Double.parseDouble(line));
                         continue;
                     }
                     case 10: {
-                        Velocity.b.setValue(Double.parseDouble(line));
+                        Velocity.vertical.setValue(Double.parseDouble(line));
                         continue;
                     }
                     case 11: {
-                        Velocity.c.setValue(Double.parseDouble(line));
+                        Velocity.chance.setValue(Double.parseDouble(line));
                         continue;
                     }
                     case 12: {
@@ -162,35 +162,35 @@ public class ConfigManager
                         continue;
                     }
                     case 13: {
-                        AutoClicker.a.setValue(Double.parseDouble(line));
+                        AutoClicker.minCPS.setValue(Double.parseDouble(line));
                         continue;
                     }
                     case 14: {
-                        AutoClicker.b.setValue(Double.parseDouble(line));
+                        AutoClicker.maxCPS.setValue(Double.parseDouble(line));
                         continue;
                     }
                     case 15: {
-                        AutoClicker.c.setValue(Double.parseDouble(line));
+                        AutoClicker.jitter.setValue(Double.parseDouble(line));
                         continue;
                     }
                     case 16: {
-                        AutoClicker.d.setEnabled(Boolean.parseBoolean(line));
+                        AutoClicker.weaponOnly.setEnabled(Boolean.parseBoolean(line));
                         continue;
                     }
                     case 17: {
-                        AutoClicker.e.setEnabled(Boolean.parseBoolean(line));
+                        AutoClicker.breakBlocks.setEnabled(Boolean.parseBoolean(line));
                         continue;
                     }
                     case 18: {
-                        AutoClicker.inv.setEnabled(Boolean.parseBoolean(line));
+                        AutoClicker.inventoryFill.setEnabled(Boolean.parseBoolean(line));
                         continue;
                     }
                     case 19: {
-                        AutoClicker.p.setEnabled(Boolean.parseBoolean(line));
+                        AutoClicker.leftClick.setEnabled(Boolean.parseBoolean(line));
                         continue;
                     }
                     case 20: {
-                        AutoClicker.q.setEnabled(Boolean.parseBoolean(line));
+                        AutoClicker.rightClick.setEnabled(Boolean.parseBoolean(line));
                         continue;
                     }
                     case 21: {

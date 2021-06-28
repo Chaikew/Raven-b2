@@ -23,8 +23,8 @@ public class AutoConfigDescRender extends ModuleDescRender
     
     public AutoConfigDescRender(final ModuleDescRenderer moduleDescRenderer, final int o) {
         this.moduleDescRenderer = moduleDescRenderer;
-        this.x = moduleDescRenderer.chromaManager.gx() + moduleDescRenderer.chromaManager.gw();
-        this.y = moduleDescRenderer.chromaManager.gy() + moduleDescRenderer.o;
+        this.x = moduleDescRenderer.category.gx() + moduleDescRenderer.category.gw();
+        this.y = moduleDescRenderer.category.gy() + moduleDescRenderer.o;
         this.o = o;
     }
     
@@ -38,21 +38,21 @@ public class AutoConfigDescRender extends ModuleDescRender
         if (this.moduleDescRenderer.mod.g3tN4m3().equalsIgnoreCase(new String(new char[] { 'A', 'u', 't', 'o', 'C', 'o', 'n', 'f', 'i', 'g' }))) {
             GL11.glPushMatrix();
             GL11.glScaled(0.5, 0.5, 0.5);
-            Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow("Auto-configurate modules.", (float)((this.moduleDescRenderer.chromaManager.gx() + 4) * 2), (float)((this.moduleDescRenderer.chromaManager.gy() + this.o + 3) * 2), Color.HSBtoRGB(System.currentTimeMillis() % 3750L / 3750.0f, 0.8f, 0.8f));
+            Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow("Auto-configurate modules.", (float)((this.moduleDescRenderer.category.gx() + 4) * 2), (float)((this.moduleDescRenderer.category.gy() + this.o + 3) * 2), Color.HSBtoRGB(System.currentTimeMillis() % 3750L / 3750.0f, 0.8f, 0.8f));
             GL11.glPopMatrix();
             return;
         }
         GL11.glPushMatrix();
         GL11.glScaled(0.5, 0.5, 0.5);
-        Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(this.isBinding ? BindKey.binding : (BindKey.bind + ": " + Keyboard.getKeyName(this.moduleDescRenderer.mod.getKeycode())), (float)((this.moduleDescRenderer.chromaManager.gx() + 4) * 2), (float)((this.moduleDescRenderer.chromaManager.gy() + this.o + 3) * 2), Color.HSBtoRGB(System.currentTimeMillis() % 3750L / 3750.0f, 0.8f, 0.8f));
+        Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(this.isBinding ? BindKey.binding : (BindKey.bind + ": " + Keyboard.getKeyName(this.moduleDescRenderer.mod.getKeycode())), (float)((this.moduleDescRenderer.category.gx() + 4) * 2), (float)((this.moduleDescRenderer.category.gy() + this.o + 3) * 2), Color.HSBtoRGB(System.currentTimeMillis() % 3750L / 3750.0f, 0.8f, 0.8f));
         GL11.glPopMatrix();
     }
     
     @Override
     public void uu(final int x, final int y) {
         this.h = this.i(x, y);
-        this.y = this.moduleDescRenderer.chromaManager.gy() + this.o;
-        this.x = this.moduleDescRenderer.chromaManager.gx();
+        this.y = this.moduleDescRenderer.category.gy() + this.o;
+        this.x = this.moduleDescRenderer.category.gx();
     }
     
     @Override
@@ -79,7 +79,7 @@ public class AutoConfigDescRender extends ModuleDescRender
     }
     
     public boolean i(final int x, final int y) {
-        return x > this.x && x < this.x + this.moduleDescRenderer.chromaManager.gw() && y > this.y - 1 && y < this.y + 12;
+        return x > this.x && x < this.x + this.moduleDescRenderer.category.gw() && y > this.y - 1 && y < this.y + 12;
     }
     
     @Override

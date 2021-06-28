@@ -26,12 +26,12 @@ import net.minecraftforge.fml.common.gameevent.TickEvent;
 
 public class WaterBucket extends Module
 {
-    public static ModuleDesc a;
+    public static ModuleDesc moduleDesc;
     private boolean handling;
     
     public WaterBucket() {
         super(new char[] { 'W', 'a', 't', 'e', 'r', ' ', 'B', 'u', 'c', 'k', 'e', 't' }, category.other, 0);
-        this.registerSetting(WaterBucket.a = new ModuleDesc("Credits: aycy"));
+        this.registerSetting(WaterBucket.moduleDesc = new ModuleDesc("Credits: aycy"));
     }
     
     @SubscribeEvent

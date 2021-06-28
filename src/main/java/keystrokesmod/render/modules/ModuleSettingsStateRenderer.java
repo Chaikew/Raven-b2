@@ -24,8 +24,8 @@ public class ModuleSettingsStateRenderer extends ModuleDescRender
     public ModuleSettingsStateRenderer(final ModuleSettings op, final ModuleDescRenderer b, final int o) {
         this.cl1ckButton = op;
         this.p = b;
-        this.x = b.chromaManager.gx() + b.chromaManager.gw();
-        this.y = b.chromaManager.gy() + b.o;
+        this.x = b.category.gx() + b.category.gw();
+        this.y = b.category.gy() + b.o;
         this.o = o;
     }
     
@@ -72,7 +72,7 @@ public class ModuleSettingsStateRenderer extends ModuleDescRender
     public void render() {
         GL11.glPushMatrix();
         GL11.glScaled(0.5, 0.5, 0.5);
-        Minecraft.getMinecraft().fontRendererObj.drawString(this.cl1ckButton.isToggled() ? ("> \u2714 <   " + this.cl1ckButton.get()) : ("> x <   " + this.cl1ckButton.get()), (float)((this.p.chromaManager.gx() + 4) * 2), (float)((this.p.chromaManager.gy() + this.o + 4) * 2), this.cl1ckButton.isToggled() ? new Color(20, 255, 0).getRGB() : -1, false);
+        Minecraft.getMinecraft().fontRendererObj.drawString(this.cl1ckButton.isToggled() ? ("> \u2714 <   " + this.cl1ckButton.get()) : ("> x <   " + this.cl1ckButton.get()), (float)((this.p.category.gx() + 4) * 2), (float)((this.p.category.gy() + this.o + 4) * 2), this.cl1ckButton.isToggled() ? new Color(20, 255, 0).getRGB() : -1, false);
         GL11.glPopMatrix();
     }
     
@@ -84,8 +84,8 @@ public class ModuleSettingsStateRenderer extends ModuleDescRender
     @Override
     public void uu(final int x, final int y) {
         this.h = this.i(x, y);
-        this.y = this.p.chromaManager.gy() + this.o;
-        this.x = this.p.chromaManager.gx();
+        this.y = this.p.category.gy() + this.o;
+        this.x = this.p.category.gx();
     }
     
     @Override
@@ -96,6 +96,6 @@ public class ModuleSettingsStateRenderer extends ModuleDescRender
     }
     
     public boolean i(final int x, final int y) {
-        return x > this.x && x < this.x + this.p.chromaManager.gw() && y > this.y && y < this.y + 11;
+        return x > this.x && x < this.x + this.p.category.gw() && y > this.y && y < this.y + 11;
     }
 }

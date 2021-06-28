@@ -39,7 +39,7 @@ public class KeyStrokeGui extends GuiScreen
     }
     
     public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
-        Ravenb2.e2().renderKeystrokes();
+        Ravenb2.getKeyStrokeRenderer().renderKeystrokes();
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
     
@@ -67,7 +67,7 @@ public class KeyStrokeGui extends GuiScreen
         try {
             super.mouseClicked(mouseX, mouseY, button);
         }
-        catch (IOException ex) {}
+        catch (IOException ignored) {}
         if (button == 0) {
             KeyStrokeClickCounter.increaseLMB();
             final KeyStroke st = Ravenb2.getKeyStroke();

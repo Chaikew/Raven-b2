@@ -34,14 +34,14 @@ import java.lang.reflect.Method;
 
 public class AutoClicker extends Module
 {
-    public static ModuleSettings2 a;
-    public static ModuleSettings2 b;
-    public static ModuleSettings2 c;
-    public static ModuleSettings d;
-    public static ModuleSettings e;
-    public static ModuleSettings p;
-    public static ModuleSettings q;
-    public static ModuleSettings inv;
+    public static ModuleSettings2 minCPS;
+    public static ModuleSettings2 maxCPS;
+    public static ModuleSettings2 jitter;
+    public static ModuleSettings weaponOnly;
+    public static ModuleSettings breakBlocks;
+    public static ModuleSettings leftClick;
+    public static ModuleSettings rightClick;
+    public static ModuleSettings inventoryFill;
     private Method gs;
     private static Field f;
     private static Field g;
@@ -56,14 +56,14 @@ public class AutoClicker extends Module
     
     public AutoClicker() {
         super(new char[] { 'A', 'u', 't', 'o', 'C', 'l', 'i', 'c', 'k', 'e', 'r' }, category.combat, 0);
-        this.registerSetting(AutoClicker.a = new ModuleSettings2(new char[] { 'M', 'i', 'n', ' ', 'C', 'P', 'S' }, 9.0, 1.0, 20.0, 0.5));
-        this.registerSetting(AutoClicker.b = new ModuleSettings2(new char[] { 'M', 'a', 'x', ' ', 'C', 'P', 'S' }, 12.0, 1.0, 20.0, 0.5));
-        this.registerSetting(AutoClicker.c = new ModuleSettings2(new char[] { 'J', 'i', 't', 't', 'e', 'r' }, 0.0, 0.0, 3.0, 0.1));
-        this.registerSetting(AutoClicker.p = new ModuleSettings(new char[] { 'L', 'e', 'f', 't', ' ', 'C', 'l', 'i', 'c', 'k' }, true));
-        this.registerSetting(AutoClicker.q = new ModuleSettings(new char[] { 'R', 'i', 'g', 'h', 't', ' ', 'C', 'l', 'i', 'c', 'k' }, false));
-        this.registerSetting(AutoClicker.inv = new ModuleSettings(new char[] { 'I', 'n', 'v', 'e', 'n', 't', 'o', 'r', 'y', ' ', 'F', 'i', 'l', 'l' }, false));
-        this.registerSetting(AutoClicker.d = new ModuleSettings(new char[] { 'W', 'e', 'a', 'p', 'o', 'n', ' ', 'O', 'n', 'l', 'y' }, false));
-        this.registerSetting(AutoClicker.e = new ModuleSettings(new char[] { 'B', 'r', 'e', 'a', 'k', ' ', 'B', 'l', 'o', 'c', 'k', 's' }, false));
+        this.registerSetting(AutoClicker.minCPS = new ModuleSettings2(new char[] { 'M', 'i', 'n', ' ', 'C', 'P', 'S' }, 9.0, 1.0, 20.0, 0.5));
+        this.registerSetting(AutoClicker.maxCPS = new ModuleSettings2(new char[] { 'M', 'a', 'x', ' ', 'C', 'P', 'S' }, 12.0, 1.0, 20.0, 0.5));
+        this.registerSetting(AutoClicker.jitter = new ModuleSettings2(new char[] { 'J', 'i', 't', 't', 'e', 'r' }, 0.0, 0.0, 3.0, 0.1));
+        this.registerSetting(AutoClicker.leftClick = new ModuleSettings(new char[] { 'L', 'e', 'f', 't', ' ', 'C', 'l', 'i', 'c', 'k' }, true));
+        this.registerSetting(AutoClicker.rightClick = new ModuleSettings(new char[] { 'R', 'i', 'g', 'h', 't', ' ', 'C', 'l', 'i', 'c', 'k' }, false));
+        this.registerSetting(AutoClicker.inventoryFill = new ModuleSettings(new char[] { 'I', 'n', 'v', 'e', 'n', 't', 'o', 'r', 'y', ' ', 'F', 'i', 'l', 'l' }, false));
+        this.registerSetting(AutoClicker.weaponOnly = new ModuleSettings(new char[] { 'W', 'e', 'a', 'p', 'o', 'n', ' ', 'O', 'n', 'l', 'y' }, false));
+        this.registerSetting(AutoClicker.breakBlocks = new ModuleSettings(new char[] { 'B', 'r', 'e', 'a', 'k', ' ', 'B', 'l', 'o', 'c', 'k', 's' }, false));
         this.o = new Random();
         try {
             this.gs = GuiScreen.class.getDeclaredMethod("func_73864_a", Integer.TYPE, Integer.TYPE, Integer.TYPE);
@@ -83,16 +83,16 @@ public class AutoClicker extends Module
         if (!ModuleHelper.e() || SelfDestruct.isDestructed) {
             return;
         }
-        ModuleHelper.b(AutoClicker.a, AutoClicker.b);
+        ModuleHelper.b(AutoClicker.minCPS, AutoClicker.maxCPS);
         if (AutoClicker.mc.currentScreen == null) {
             Mouse.poll();
-            if (Mouse.isButtonDown(0) && AutoClicker.p.isToggled()) {
+            if (Mouse.isButtonDown(0) && AutoClicker.leftClick.isToggled()) {
                 if (!AutoClicker.mc.inGameHasFocus) {
                     return;
                 }
                 this.dc(AutoClicker.mc.gameSettings.keyBindAttack.getKeyCode(), 0);
             }
-            else if (Mouse.isButtonDown(1) && AutoClicker.q.isToggled()) {
+            else if (Mouse.isButtonDown(1) && AutoClicker.rightClick.isToggled()) {
                 if (!AutoClicker.mc.inGameHasFocus) {
                     return;
                 }
@@ -105,7 +105,7 @@ public class AutoClicker extends Module
         }
         else if (AutoClicker.mc.currentScreen instanceof GuiInventory) {
             if (Mouse.isButtonDown(0) && (Keyboard.isKeyDown(54) || Keyboard.isKeyDown(42))) {
-                if (!AutoClicker.inv.isToggled()) {
+                if (!AutoClicker.inventoryFill.isToggled()) {
                     return;
                 }
                 if (this.i == 0L || this.j == 0L) {
@@ -125,7 +125,7 @@ public class AutoClicker extends Module
     }
     
     public void dc(final int key, final int mouse) {
-        if (AutoClicker.d.isToggled()) {
+        if (AutoClicker.weaponOnly.isToggled()) {
             if (AutoClicker.mc.thePlayer.getCurrentEquippedItem() == null) {
                 return;
             }
@@ -133,7 +133,7 @@ public class AutoClicker extends Module
                 return;
             }
         }
-        if (AutoClicker.e.isToggled() && AutoClicker.mc.objectMouseOver != null) {
+        if (AutoClicker.breakBlocks.isToggled() && AutoClicker.mc.objectMouseOver != null) {
             final BlockPos p = AutoClicker.mc.objectMouseOver.getBlockPos();
             if (p != null) {
                 if (AutoClicker.mc.theWorld.getBlockState(p).getBlock() != Blocks.air) {
@@ -144,8 +144,8 @@ public class AutoClicker extends Module
                 KeyBinding.setKeyBindState(key, false);
             }
         }
-        if (AutoClicker.c.getInput() > 0.0) {
-            final double a = AutoClicker.c.getInput() * 0.45;
+        if (AutoClicker.jitter.getInput() > 0.0) {
+            final double a = AutoClicker.jitter.getInput() * 0.45;
             if (this.o.nextBoolean()) {
                 final EntityPlayerSP thePlayer = AutoClicker.mc.thePlayer;
                 thePlayer.rotationYaw += (float)(this.o.nextFloat() * a);
@@ -181,8 +181,8 @@ public class AutoClicker extends Module
     }
     
     public void gd() {
-        final double a = AutoClicker.a.getInput();
-        final double b = AutoClicker.b.getInput();
+        final double a = AutoClicker.minCPS.getInput();
+        final double b = AutoClicker.maxCPS.getInput();
         final double c = a + this.o.nextDouble() * (b - a);
         long d = (int)Math.round(1000.0 / c);
         if (System.currentTimeMillis() > this.k) {

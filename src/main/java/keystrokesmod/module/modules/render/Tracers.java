@@ -20,22 +20,22 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 
 public class Tracers extends Module
 {
-    public static ModuleSettings a;
-    public static ModuleSettings2 b;
-    public static ModuleSettings2 c;
-    public static ModuleSettings2 d;
-    public static ModuleSettings e;
-    public static ModuleSettings2 f;
+    public static ModuleSettings invisible;
+    public static ModuleSettings2 red;
+    public static ModuleSettings2 green;
+    public static ModuleSettings2 blue;
+    public static ModuleSettings rainbow;
+    public static ModuleSettings2 lineWidth;
     private boolean g;
     
     public Tracers() {
         super(new char[] { 'T', 'r', 'a', 'c', 'e', 'r', 's' }, category.render, 0);
-        this.registerSetting(Tracers.a = new ModuleSettings(new char[] { 'I', 'n', 'v', 'i', 's', 'i', 'b', 'l', 'e' }, true));
-        this.registerSetting(Tracers.f = new ModuleSettings2(new char[] { 'L', 'i', 'n', 'e', ' ', 'W', 'i', 'd', 't', 'h' }, 1.0, 1.0, 5.0, 1.0));
-        this.registerSetting(Tracers.b = new ModuleSettings2(new char[] { 'R', 'e', 'd' }, 0.0, 0.0, 255.0, 1.0));
-        this.registerSetting(Tracers.c = new ModuleSettings2(new char[] { 'G', 'r', 'e', 'e', 'n' }, 255.0, 0.0, 255.0, 1.0));
-        this.registerSetting(Tracers.d = new ModuleSettings2(new char[] { 'B', 'l', 'u', 'e' }, 0.0, 0.0, 255.0, 1.0));
-        this.registerSetting(Tracers.e = new ModuleSettings(new char[] { 'R', 'a', 'i', 'n', 'b', 'o', 'w' }, false));
+        this.registerSetting(Tracers.invisible = new ModuleSettings(new char[] { 'I', 'n', 'v', 'i', 's', 'i', 'b', 'l', 'e' }, true));
+        this.registerSetting(Tracers.lineWidth = new ModuleSettings2(new char[] { 'L', 'i', 'n', 'e', ' ', 'W', 'i', 'd', 't', 'h' }, 1.0, 1.0, 5.0, 1.0));
+        this.registerSetting(Tracers.red = new ModuleSettings2(new char[] { 'R', 'e', 'd' }, 0.0, 0.0, 255.0, 1.0));
+        this.registerSetting(Tracers.green = new ModuleSettings2(new char[] { 'G', 'r', 'e', 'e', 'n' }, 255.0, 0.0, 255.0, 1.0));
+        this.registerSetting(Tracers.blue = new ModuleSettings2(new char[] { 'B', 'l', 'u', 'e' }, 0.0, 0.0, 255.0, 1.0));
+        this.registerSetting(Tracers.rainbow = new ModuleSettings(new char[] { 'R', 'a', 'i', 'n', 'b', 'o', 'w' }, false));
     }
     
     @Override
@@ -65,19 +65,19 @@ public class Tracers extends Module
         }
         for (final EntityPlayer en : Tracers.mc.theWorld.playerEntities) {
             if (en != Tracers.mc.thePlayer && !en.getDisplayName().getUnformattedText().startsWith(ModuleHelper.r("&8[NPC]"))) {
-                if (!Tracers.a.isToggled() && en.isInvisible()) {
+                if (!Tracers.invisible.isToggled() && en.isInvisible()) {
                     return;
                 }
                 int rgb = 0;
-                if (!Tracers.e.isToggled()) {
-                    rgb = new Color((int) Tracers.b.getInput(), (int) Tracers.c.getInput(), (int) Tracers.d.getInput()).getRGB();
+                if (!Tracers.rainbow.isToggled()) {
+                    rgb = new Color((int) Tracers.red.getInput(), (int) Tracers.green.getInput(), (int) Tracers.blue.getInput()).getRGB();
                 }
                 else {
                     float hue = (float)((System.currentTimeMillis() - 15L) % 6000L);
                     hue /= 6000.0f;
                     rgb = Color.getHSBColor(hue, 1.0f, 1.0f).getRGB();
                 }
-                RenderUtils.dtl((Entity)en, rgb, (float) Tracers.f.getInput());
+                RenderUtils.dtl((Entity)en, rgb, (float) Tracers.lineWidth.getInput());
             }
         }
     }

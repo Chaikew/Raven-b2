@@ -23,13 +23,13 @@ import net.minecraft.entity.Entity;
 
 public class HitBox extends Module
 {
-    public static ModuleSettings2 a;
+    public static ModuleSettings2 multiplier;
     private Entity pointedEntity;
     private MovingObjectPosition moving;
     
     public HitBox() {
         super(new char[] { 'H', 'i', 't', 'B', 'o', 'x' }, category.combat, 0);
-        this.registerSetting(HitBox.a = new ModuleSettings2(new char[] { 'M', 'u', 'l', 't', 'i', 'p', 'l', 'i', 'e', 'r' }, 1.2000000476837158, 1.0, 10.0, 0.10000000149011612));
+        this.registerSetting(HitBox.multiplier = new ModuleSettings2(new char[] { 'M', 'u', 'l', 't', 'i', 'p', 'l', 'i', 'e', 'r' }, 1.2000000476837158, 1.0, 10.0, 0.10000000149011612));
     }
     
     @SubscribeEvent
@@ -40,7 +40,7 @@ public class HitBox extends Module
     }
     
     @SubscribeEvent
-    public void t(final TickEvent.ClientTickEvent e) {
+    public void onTick(final TickEvent.ClientTickEvent e) {
         this.getMouseOver(1.0f);
     }
     
@@ -64,7 +64,7 @@ public class HitBox extends Module
             for (int i = 0; i < list.size(); ++i) {
                 final Entity entity = (Entity) list.get(i);
                 if (entity.canBeCollidedWith()) {
-                    final float f2 = (float)(0.12999999523162842 * HitBox.a.getInput());
+                    final float f2 = (float)(0.12999999523162842 * HitBox.multiplier.getInput());
                     final AxisAlignedBB axisalignedbb = entity.getEntityBoundingBox().expand((double)f2, (double)f2, (double)f2);
                     final MovingObjectPosition movingobjectposition = axisalignedbb.calculateIntercept(vec3, vec5);
                     if (axisalignedbb.isVecInside(vec3)) {

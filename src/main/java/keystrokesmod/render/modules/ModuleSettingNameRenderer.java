@@ -30,18 +30,18 @@ public class ModuleSettingNameRenderer extends ModuleDescRender
         this.d = false;
         this.v = v;
         this.p = b;
-        this.x = b.chromaManager.gx() + b.chromaManager.gw();
-        this.y = b.chromaManager.gy() + b.o;
+        this.x = b.category.gx() + b.category.gw();
+        this.y = b.category.gy() + b.o;
         this.o = o;
     }
     
     @Override
     public void render() {
-        Gui.drawRect(this.p.chromaManager.gx() + 4, this.p.chromaManager.gy() + this.o + 11, this.p.chromaManager.gx() + 4 + this.p.chromaManager.gw() - 8, this.p.chromaManager.gy() + this.o + 15, -12302777);
-        Gui.drawRect(this.p.chromaManager.gx() + 4, this.p.chromaManager.gy() + this.o + 11, this.p.chromaManager.gx() + 4 + (int)this.w, this.p.chromaManager.gy() + this.o + 15, Color.getHSBColor(System.currentTimeMillis() % 11000L / 11000.0f, 0.75f, 0.9f).getRGB());
+        Gui.drawRect(this.p.category.gx() + 4, this.p.category.gy() + this.o + 11, this.p.category.gx() + 4 + this.p.category.gw() - 8, this.p.category.gy() + this.o + 15, -12302777);
+        Gui.drawRect(this.p.category.gx() + 4, this.p.category.gy() + this.o + 11, this.p.category.gx() + 4 + (int)this.w, this.p.category.gy() + this.o + 15, Color.getHSBColor(System.currentTimeMillis() % 11000L / 11000.0f, 0.75f, 0.9f).getRGB());
         GL11.glPushMatrix();
         GL11.glScaled(0.5, 0.5, 0.5);
-        Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(String.valueOf(this.v.get()) + ": " + this.v.getInput(), (float)(int)((this.p.chromaManager.gx() + 4) * 2.0f), (float)(int)((this.p.chromaManager.gy() + this.o + 3) * 2.0f), -1);
+        Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow(String.valueOf(this.v.get()) + ": " + this.v.getInput(), (float)(int)((this.p.category.gx() + 4) * 2.0f), (float)(int)((this.p.category.gy() + this.o + 3) * 2.0f), -1);
         GL11.glPopMatrix();
     }
     
@@ -53,16 +53,16 @@ public class ModuleSettingNameRenderer extends ModuleDescRender
     @Override
     public void uu(final int x, final int y) {
         this.h = (this.u(x, y) || this.i(x, y));
-        this.y = this.p.chromaManager.gy() + this.o;
-        this.x = this.p.chromaManager.gx();
-        final double d = Math.min(this.p.chromaManager.gw() - 8, Math.max(0, x - this.x));
-        this.w = (this.p.chromaManager.gw() - 8) * (this.v.getInput() - this.v.geti()) / (this.v.geta() - this.v.geti());
+        this.y = this.p.category.gy() + this.o;
+        this.x = this.p.category.gx();
+        final double d = Math.min(this.p.category.gw() - 8, Math.max(0, x - this.x));
+        this.w = (this.p.category.gw() - 8) * (this.v.getInput() - this.v.geti()) / (this.v.geta() - this.v.geti());
         if (this.d) {
             if (d == 0.0) {
                 this.v.setValue(this.v.geti());
             }
             else {
-                final double n = r(d / (this.p.chromaManager.gw() - 8) * (this.v.geta() - this.v.geti()) + this.v.geti(), 2);
+                final double n = r(d / (this.p.category.gw() - 8) * (this.v.geta() - this.v.geti()) + this.v.geti(), 2);
                 this.v.setValue(n);
             }
         }
@@ -93,10 +93,10 @@ public class ModuleSettingNameRenderer extends ModuleDescRender
     }
     
     public boolean u(final int x, final int y) {
-        return x > this.x && x < this.x + (this.p.chromaManager.gw() / 2 + 1) && y > this.y && y < this.y + 16;
+        return x > this.x && x < this.x + (this.p.category.gw() / 2 + 1) && y > this.y && y < this.y + 16;
     }
     
     public boolean i(final int x, final int y) {
-        return x > this.x + this.p.chromaManager.gw() / 2 && x < this.x + this.p.chromaManager.gw() && y > this.y && y < this.y + 16;
+        return x > this.x + this.p.category.gw() / 2 && x < this.x + this.p.category.gw() && y > this.y && y < this.y + 16;
     }
 }

@@ -13,8 +13,8 @@ import keystrokesmod.module.ModuleSettings2;
 
 public class Speed extends Module
 {
-    public static ModuleSettings2 a;
-    public static ModuleSettings b;
+    public static ModuleSettings2 speed;
+    public static ModuleSettings strafeOnly;
     private boolean c;
     private boolean f;
     private double ps;
@@ -26,15 +26,15 @@ public class Speed extends Module
         this.f = true;
         this.ps = 0.0;
         this.bb = false;
-        Speed.a = new ModuleSettings2(new char[] { 'S', 'p', 'e', 'e', 'd' }, 1.01, 1.01, 3.0, 0.01);
-        Speed.b = new ModuleSettings(new char[] { 'S', 't', 'r', 'a', 'f', 'e', ' ', 'O', 'n', 'l', 'y' }, false);
-        this.registerSetting(Speed.a);
-        this.registerSetting(Speed.b);
+        Speed.speed = new ModuleSettings2(new char[] { 'S', 'p', 'e', 'e', 'd' }, 1.01, 1.01, 3.0, 0.01);
+        Speed.strafeOnly = new ModuleSettings(new char[] { 'S', 't', 'r', 'a', 'f', 'e', ' ', 'O', 'n', 'l', 'y' }, false);
+        this.registerSetting(Speed.speed);
+        this.registerSetting(Speed.strafeOnly);
     }
     
     @Override
     public void update() {
-        if ((!Speed.b.isToggled() && !ModuleHelper.im()) || (Speed.b.isToggled() && Speed.mc.thePlayer.moveStrafing == 0.0f) || (Speed.mc.thePlayer.hurtTime == Speed.mc.thePlayer.maxHurtTime && Speed.mc.thePlayer.maxHurtTime > 0)) {
+        if ((!Speed.strafeOnly.isToggled() && !ModuleHelper.im()) || (Speed.strafeOnly.isToggled() && Speed.mc.thePlayer.moveStrafing == 0.0f) || (Speed.mc.thePlayer.hurtTime == Speed.mc.thePlayer.maxHurtTime && Speed.mc.thePlayer.maxHurtTime > 0)) {
             return;
         }
         if (ModuleHelper.im() && !ModuleHelper.sd() && Speed.mc.thePlayer.isSprinting() && Speed.mc.thePlayer.onGround && Speed.mc.currentScreen == null) {
@@ -43,7 +43,7 @@ public class Speed extends Module
                 this.f = false;
                 spd = ModuleHelper.gs();
             }
-            ModuleHelper.ss(spd * Speed.a.getInput(), true);
+            ModuleHelper.ss(spd * Speed.speed.getInput(), true);
             this.ps = spd;
         }
         else {

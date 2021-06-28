@@ -22,21 +22,21 @@ import net.minecraftforge.client.event.RenderWorldLastEvent;
 
 public class ChestESP extends Module
 {
-    public static ModuleSettings2 a;
-    public static ModuleSettings2 b;
-    public static ModuleSettings2 c;
-    public static ModuleSettings d;
+    public static ModuleSettings2 red;
+    public static ModuleSettings2 green;
+    public static ModuleSettings2 blue;
+    public static ModuleSettings rainbow;
     
     public ChestESP() {
         super(new char[] { 'C', 'h', 'e', 's', 't', 'E', 'S', 'P' }, category.render, 0);
-        ChestESP.a = new ModuleSettings2(new char[] { 'R', 'e', 'd' }, 0.0, 0.0, 255.0, 1.0);
-        ChestESP.b = new ModuleSettings2(new char[] { 'G', 'r', 'e', 'e', 'n' }, 0.0, 0.0, 255.0, 1.0);
-        ChestESP.c = new ModuleSettings2(new char[] { 'B', 'l', 'u', 'e' }, 255.0, 0.0, 255.0, 1.0);
-        ChestESP.d = new ModuleSettings(new char[] { 'R', 'a', 'i', 'n', 'b', 'o', 'w' }, false);
-        this.registerSetting(ChestESP.a);
-        this.registerSetting(ChestESP.b);
-        this.registerSetting(ChestESP.c);
-        this.registerSetting(ChestESP.d);
+        ChestESP.red = new ModuleSettings2(new char[] { 'R', 'e', 'd' }, 0.0, 0.0, 255.0, 1.0);
+        ChestESP.green = new ModuleSettings2(new char[] { 'G', 'r', 'e', 'e', 'n' }, 0.0, 0.0, 255.0, 1.0);
+        ChestESP.blue = new ModuleSettings2(new char[] { 'B', 'l', 'u', 'e' }, 255.0, 0.0, 255.0, 1.0);
+        ChestESP.rainbow = new ModuleSettings(new char[] { 'R', 'a', 'i', 'n', 'b', 'o', 'w' }, false);
+        this.registerSetting(ChestESP.red);
+        this.registerSetting(ChestESP.green);
+        this.registerSetting(ChestESP.blue);
+        this.registerSetting(ChestESP.rainbow);
     }
     
     @SubscribeEvent
@@ -47,8 +47,8 @@ public class ChestESP extends Module
         for (final TileEntity te : ChestESP.mc.theWorld.loadedTileEntityList) {
             if (te instanceof TileEntityChest || te instanceof TileEntityEnderChest) {
                 int rgb = 0;
-                if (!ChestESP.d.isToggled()) {
-                    rgb = new Color((int) ChestESP.a.getInput(), (int) ChestESP.b.getInput(), (int) ChestESP.c.getInput()).getRGB();
+                if (!ChestESP.rainbow.isToggled()) {
+                    rgb = new Color((int) ChestESP.red.getInput(), (int) ChestESP.green.getInput(), (int) ChestESP.blue.getInput()).getRGB();
                 }
                 else {
                     float hue = (float)((System.currentTimeMillis() - 15L) % 6000L);
