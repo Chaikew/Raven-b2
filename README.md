@@ -1,5 +1,8 @@
 # **Raven b2** deobfuscated
 
+## Warning ⚠️:
+> This repo is for educational purposes only. I am NOT responsible for ANY consequences of it use/distribute !
+
 ## Time taken :
 5 hours of remapping, 30min of bugfixing
 
