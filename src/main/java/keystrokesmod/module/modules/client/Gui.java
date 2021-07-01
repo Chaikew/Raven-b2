@@ -22,7 +22,7 @@ public class Gui extends Module
     
     public Gui() {
         super(new char[] { 'G', 'u', 'i' }, category.client, 54);
-        this.registerSetting(Gui.settings = new ModuleSettings2("Theme", 1.0, 1.0, 3.0, 1.0));
+        this.registerSetting(Gui.settings = new ModuleSettings2(new char[] {'T', 'h', 'e', 'm', 'e'}, 1.0, 1.0, 3.0, 1.0));
         this.registerSetting(Gui.b = new ModuleDesc(ModuleHelper.c + "b" + Ravenb2.ravenVersion));
     }
     
